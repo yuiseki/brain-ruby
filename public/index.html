@@ -47,18 +47,18 @@
           return csv;
       };
       setInterval(function() {
-          //var csv = getBrainWave();
-          $.each(brains, function(i, val){
-            var value = Math.floor( Math.random() * 10000 * i );
-            var now = new Date().getTime();
-            /*
-            if( i == 0 ) {
-              var value = csv[i+1]*1000;
-            }
-            */
-            //var value = csv[i+1];
-            brainWavesTimeSeries[val].append(now, value);
-          });
+          var csv = getBrainWave();
+          if (csv.length > 2) {
+              $.each(brains, function(i, val){
+                //var value = Math.floor( Math.random() * 10000 * i );
+                var now = new Date().getTime();
+                if( i == 0 ) {
+                  var value = csv[i+1]*1000;
+                }
+                var value = csv[i+1];
+                brainWavesTimeSeries[val].append(now, value);
+              });
+          }
       }, 1000);
 
       var smoothie = new SmoothieChart({ minValue: 0.0, maxValue: 100000.0, millisPerPixel: 20,
